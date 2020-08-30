@@ -1,98 +1,28 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace AddressbookWebTest
 {
-    [TestFixture]
-    public class ContactsCreationTests
+    public class FillFormsHelper : HelperBase
     {
-        private IWebDriver driver;
-        private StringBuilder verificationErrors;
-        private string baseURL;
-        private bool acceptNextAlert = true;
-
-        [SetUp]
-        public void SetupTest()
+        public FillFormsHelper(IWebDriver driver) : base(driver)
         {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook/";
-            verificationErrors = new StringBuilder();
         }
 
-        [TearDown]
-        public void TeardownTest()
+        public void FillGroupForm(GroupData groupData)
         {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
+            driver.FindElement(By.Name("group_name")).Click();
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
+            driver.FindElement(By.Name("group_header")).Click();
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
+            driver.FindElement(By.Name("group_footer")).Click();
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
         }
 
-        [Test]
-        public void ContactsCreationTest()
-        {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToNewContacts();
-
-            ContactsData contactsData = new ContactsData("Serge");
-            contactsData.Middlename = "Klementin";
-            contactsData.Lastname = "Unitazoff";
-            contactsData.Nickname = "Iorshik";
-            contactsData.Title = "Tra-ta-ta";
-            contactsData.Company = "NiPomNu";
-            contactsData.Address = "Moscow, sleva";
-            contactsData.Home = "15";
-            contactsData.Mobile = "+7 905 322 223 32";
-            contactsData.Work = "Guard";
-            contactsData.Fax = "+7 905 322 223 32";
-            contactsData.Email = "superbulet@mail.ru";
-            contactsData.Email2 = "superbulet@mail.ru";
-            contactsData.Email3 = "superbulet@mail.ru";
-            contactsData.Homepage = @"vk.com\svirepiy";
-            contactsData.Bday = "15";
-            contactsData.Bmonth = "May";
-            contactsData.Byear = "1940";
-            contactsData.Aday = "15";
-            contactsData.Amonth = "May";
-            contactsData.Ayear = "1940";
-            contactsData.Address2 = "Moscow, sleva";
-            contactsData.Phone2 = "+7 905 322 223 32";
-            contactsData.Notes = "Tra-ta-ta";
-
-            FillContactForm(contactsData);
-            SubmitContactCreation();
-            GoToHomePage();
-            Logout();
-        }
-
-        private void Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
-
-        private void GoToHomePage()
-        {
-            driver.FindElement(By.LinkText("home")).Click();
-        }
-
-        private void SubmitContactCreation()
-        {
-            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
-        }
-
-        private void FillContactForm(ContactsData contactsData)
+        public void FillContactForm(ContactsData contactsData)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -167,75 +97,6 @@ namespace AddressbookWebTest
             driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contactsData.Notes);
-        }
-
-        private void GoToNewContacts()
-        {
-            driver.FindElement(By.LinkText("add new")).Click();
-        }
-
-        private void Login(AccountData accountData)
-        {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(accountData.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(accountData.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
-
-        private void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL);
-        }
-
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
-        private bool IsAlertPresent()
-        {
-            try
-            {
-                driver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
-        }
-
-        private string CloseAlertAndGetItsText()
-        {
-            try
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                string alertText = alert.Text;
-                if (acceptNextAlert)
-                {
-                    alert.Accept();
-                }
-                else
-                {
-                    alert.Dismiss();
-                }
-                return alertText;
-            }
-            finally
-            {
-                acceptNextAlert = true;
-            }
         }
     }
 }

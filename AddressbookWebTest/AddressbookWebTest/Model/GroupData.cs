@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AddressbookWebTest
+﻿namespace AddressbookWebTest
 {
-    class GroupData
+    public class GroupData
     {
         string name;
         string header;
