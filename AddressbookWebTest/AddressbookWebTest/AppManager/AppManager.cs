@@ -7,14 +7,14 @@ namespace AddressbookWebTest
 {
     public class AppManager
     {
-        protected IWebDriver driver;
-        protected string baseURL;
+        private IWebDriver driver;
+        private string baseURL;
 
-        protected LoginOutHelper loginOutHelper;
-        protected NavigationHelper navigationHelper;
-        protected FillFormsHelper fillFormsHelper;
-        protected GroupHelper groupHelper;
-        protected ContactsHelper contactsHelper;
+        private LoginOutHelper loginOutHelper;
+        private NavigationHelper navigationHelper;
+        private FillFormsHelper fillFormsHelper;
+        private GroupHelper groupHelper;
+        private ContactsHelper contactsHelper;
 
 
         public IWebDriver Driver { get { return driver; } }
@@ -34,8 +34,8 @@ namespace AddressbookWebTest
             loginOutHelper = new LoginOutHelper(driver);
             navigationHelper = new NavigationHelper(driver, baseURL);
             fillFormsHelper = new FillFormsHelper(driver);
-            groupHelper = new GroupHelper(driver);
-            contactsHelper = new ContactsHelper(driver);
+            groupHelper = new GroupHelper(this);
+            contactsHelper = new ContactsHelper(this);
         }
 
         public void Stop()

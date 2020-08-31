@@ -8,11 +8,8 @@ namespace AddressbookWebTest
         [Test]
         public void ContactsCreationTest()
         {
-            appManager.Navigator.OpenHomePage();
-            appManager.Auth.Login(new AccountData("admin", "secret"));
-            appManager.Navigator.GoToNewContacts();
-
             ContactsData contactsData = new ContactsData("Serge");
+
             contactsData.Middlename = "Klementin";
             contactsData.Lastname = "Unitazoff";
             contactsData.Nickname = "Iorshik";
@@ -37,10 +34,7 @@ namespace AddressbookWebTest
             contactsData.Phone2 = "+7 905 322 223 32";
             contactsData.Notes = "Tra-ta-ta";
 
-            appManager.FillForms.FillContactForm(contactsData);
-            appManager.Contacts.SubmitContactCreation();
-            appManager.Navigator.GoToHomePage();
-            appManager.Auth.Logout();
+            appManager.Contacts.Create(contactsData);
         }
     }
 }

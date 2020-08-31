@@ -4,9 +4,29 @@ namespace AddressbookWebTest
 {
     public class GroupHelper : HelperBase
     {
-        public GroupHelper(IWebDriver driver) : base(driver)
+        AppManager appManager;
+
+        public GroupHelper(AppManager appManager) : base(appManager.Driver)
         {
+            this.appManager = appManager;
         }
+
+        public void Create(GroupData groupData)
+        {
+            appManager.Navigator.GoToGroupsPage();
+            InitGroupCreation();
+            appManager.FillForms.FillGroupForm(groupData);
+            SubmitGroupCreation();
+            appManager.Navigator.ReturnGropsPage();
+        }
+
+        public void Remove()
+        {
+            appManager.Navigator.GoToGroupsPage();
+            ExtractGroup(1);
+            RemoveGroup();
+            appManager.Navigator.ReturnGropsPage();
+        } 
 
         public void SubmitGroupCreation()
         {

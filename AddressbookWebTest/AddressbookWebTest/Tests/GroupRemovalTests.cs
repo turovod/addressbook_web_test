@@ -8,14 +8,9 @@ namespace AddressbookWebTest
        
 
         [Test]
-        public void GroupsCreationTest()
+        public void GroupsRemovalTest()
         {
-            appManager.Navigator.OpenHomePage();
-            appManager.Auth.Login(new AccountData("admin", "secret"));
-            appManager.Navigator.GoToGroupsPage();
-            appManager.Groups.ExtractGroup(1);
-            appManager.Groups.RemoveGroup();
-            appManager.Navigator.ReturnGropsPage();
+            appManager.Groups.Remove();
         }
     }
 }
