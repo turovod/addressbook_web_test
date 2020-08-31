@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManager\AppManager.cs" />
     <Compile Include="AppManager\ContactsHelper.cs" />
     <Compile Include="AppManager\FillFormsHelper.cs" />
     <Compile Include="AppManager\GroupHelper.cs" />

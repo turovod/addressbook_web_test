@@ -8,19 +8,19 @@ namespace AddressbookWebTest
         [Test]
         public void GroupCreationTest()
         {
-            navigationHelper.OpenHomePage();
-            loginOutHelper.Login(new AccountData("admin", "secret"));
-            navigationHelper.GoToGroupsPage();
-            groupHelper.InitGroupCreation();
+            appManager.Navigator.OpenHomePage();
+            appManager.Auth.Login(new AccountData("admin", "secret"));
+            appManager.Navigator.GoToGroupsPage();
+            appManager.Groups.InitGroupCreation();
 
             GroupData groupData = new GroupData("ssss");
             groupData.Header = "ssss";
             groupData.Footer = "ssss";
 
-            fillFormsHelper.FillGroupForm(groupData);
-            groupHelper.SubmitGroupCreation();
-            navigationHelper.ReturnGropsPage();
-            loginOutHelper.Logout();
+            appManager.FillForms.FillGroupForm(groupData);
+            appManager.Groups.SubmitGroupCreation();
+            appManager.Navigator.ReturnGropsPage();
+            appManager.Auth.Logout();
         }
     }
 }

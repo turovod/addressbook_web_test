@@ -10,12 +10,12 @@ namespace AddressbookWebTest
         [Test]
         public void GroupsCreationTest()
         {
-            navigationHelper.OpenHomePage();
-            loginOutHelper.Login(new AccountData("admin", "secret"));
-            navigationHelper.GoToGroupsPage();
-            groupHelper.ExtractGroup(1);
-            groupHelper.RemoveGroup();
-            navigationHelper.ReturnGropsPage();
+            appManager.Navigator.OpenHomePage();
+            appManager.Auth.Login(new AccountData("admin", "secret"));
+            appManager.Navigator.GoToGroupsPage();
+            appManager.Groups.ExtractGroup(1);
+            appManager.Groups.RemoveGroup();
+            appManager.Navigator.ReturnGropsPage();
         }
     }
 }
