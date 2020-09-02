@@ -4,7 +4,7 @@ namespace AddressbookWebTest
 {
     public class LoginOutHelper : HelperBase
     {
-        public LoginOutHelper(IWebDriver driver) : base(driver)
+        public LoginOutHelper(AppManager appManager) : base(appManager)
         {
         }
 

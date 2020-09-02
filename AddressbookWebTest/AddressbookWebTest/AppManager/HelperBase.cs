@@ -5,10 +5,12 @@ namespace AddressbookWebTest
     public class HelperBase
     {
         protected IWebDriver driver;
+        protected AppManager appManager;
 
-        public HelperBase(IWebDriver driver)
+        public HelperBase(AppManager appManager)
         {
-            this.driver = driver;
+            this.driver = appManager.Driver;
+            this.appManager = appManager;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace AddressbookWebTest
     {
         AppManager appManager;
 
-        public ContactsHelper(AppManager appManager) : base(appManager.Driver)
+        public ContactsHelper(AppManager appManager) : base(appManager)
         {
             this.appManager = appManager;
         }

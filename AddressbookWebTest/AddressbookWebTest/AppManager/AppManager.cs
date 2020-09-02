@@ -31,9 +31,9 @@ namespace AddressbookWebTest
             driver = new FirefoxDriver();
             baseURL = "http://localhost/addressbook/";
 
-            loginOutHelper = new LoginOutHelper(driver);
-            navigationHelper = new NavigationHelper(driver, baseURL);
-            fillFormsHelper = new FillFormsHelper(driver);
+            loginOutHelper = new LoginOutHelper(this);
+            navigationHelper = new NavigationHelper(this, baseURL);
+            fillFormsHelper = new FillFormsHelper(this);
             groupHelper = new GroupHelper(this);
             contactsHelper = new ContactsHelper(this);
         }

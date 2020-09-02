@@ -5,7 +5,7 @@ namespace AddressbookWebTest
 {
     public class FillFormsHelper : HelperBase
     {
-        public FillFormsHelper(IWebDriver driver) : base(driver)
+        public FillFormsHelper(AppManager appManager) : base(appManager)
         {
         }
 

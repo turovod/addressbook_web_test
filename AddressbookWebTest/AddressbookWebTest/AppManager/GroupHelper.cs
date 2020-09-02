@@ -6,7 +6,7 @@ namespace AddressbookWebTest
     {
         AppManager appManager;
 
-        public GroupHelper(AppManager appManager) : base(appManager.Driver)
+        public GroupHelper(AppManager appManager) : base(appManager)
         {
             this.appManager = appManager;
         }
@@ -20,10 +20,10 @@ namespace AddressbookWebTest
             appManager.Navigator.ReturnGropsPage();
         }
 
-        public void Remove()
+        public void Remove(int index)
         {
             appManager.Navigator.GoToGroupsPage();
-            ExtractGroup(1);
+            ExtractGroup(index);
             RemoveGroup();
             appManager.Navigator.ReturnGropsPage();
         } 
