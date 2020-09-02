@@ -6,6 +6,8 @@
         string header;
         string footer;
 
+        int rowModify;
+
         public GroupData(string name)
         {
             this.name = name;
@@ -30,6 +32,13 @@
             get { return footer; }
 
             set { footer = value; }
+        }
+
+        public int RowModify
+        {
+            get { return rowModify; }
+
+            set { rowModify = value; }
         }
 
     }

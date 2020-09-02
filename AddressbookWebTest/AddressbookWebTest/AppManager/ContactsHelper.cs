@@ -1,14 +1,31 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using System;
+using System.Text.RegularExpressions;
 
 namespace AddressbookWebTest
 {
     public class ContactsHelper : HelperBase
     {
-        AppManager appManager;
-
         public ContactsHelper(AppManager appManager) : base(appManager)
         {
-            this.appManager = appManager;
+        }
+
+        internal void Modify(ContactsData contactsData)
+        {
+            appManager.Navigator.GoToHomePage();
+            InitContactModification(contactsData);
+            appManager.FillForms.FillContactForm(contactsData);
+            UpdateContactModification();
+            appManager.Navigator.GoToHomePage();
+        }
+
+        internal void Remove(int index)
+        {
+            appManager.Navigator.GoToHomePage();
+            ExtractContact(index);
+            RemoveContact();
+            appManager.Navigator.GoToHomePage();
         }
 
         public void Create(ContactsData contactsData)
@@ -19,9 +36,36 @@ namespace AddressbookWebTest
             appManager.Navigator.GoToHomePage();
         }
 
+        private void ExtractContact(int index)
+        {
+            driver.FindElement(By.XPath("//tr["+ index + "]/td/input")).Click();
+
+        }
+
+        private void RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            driver.FindElement(By.LinkText("home")).Click();
+        }
+
+
+        private void InitContactModification(ContactsData contactsData)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contactsData.RowModfy + "]/td[8]/a/img")).Click();
+        }
+
+
         public void SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
         }
+
+
+        private void UpdateContactModification()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+        }
+
     }
 }

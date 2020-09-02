@@ -39,8 +39,6 @@
         public string Phone2 { get; set; }
         public string Notes { get; set; }
 
-
-
-
+        public int RowModfy { get; set; }
     }
 }

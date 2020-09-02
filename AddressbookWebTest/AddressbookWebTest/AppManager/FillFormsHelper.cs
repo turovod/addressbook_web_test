@@ -66,7 +66,6 @@ namespace AddressbookWebTest
             driver.FindElement(By.Name("email3")).Click();
             driver.FindElement(By.Name("email3")).Clear();
             driver.FindElement(By.Name("email3")).SendKeys(contactsData.Email3);
-            driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(contactsData.Homepage);

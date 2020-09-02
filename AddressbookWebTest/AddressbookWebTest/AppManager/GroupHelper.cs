@@ -1,14 +1,12 @@
 ﻿using OpenQA.Selenium;
+using System;
 
 namespace AddressbookWebTest
 {
     public class GroupHelper : HelperBase
     {
-        AppManager appManager;
-
         public GroupHelper(AppManager appManager) : base(appManager)
         {
-            this.appManager = appManager;
         }
 
         public void Create(GroupData groupData)
@@ -18,6 +16,26 @@ namespace AddressbookWebTest
             appManager.FillForms.FillGroupForm(groupData);
             SubmitGroupCreation();
             appManager.Navigator.ReturnGropsPage();
+        }
+
+        internal void Modify(GroupData groupData)
+        {
+            appManager.Navigator.GoToGroupsPage();
+            InitGroupModification(groupData);
+            appManager.FillForms.FillGroupForm(groupData);
+            SubmitGroupModification();
+            appManager.Navigator.ReturnGropsPage();
+        }
+
+        private void SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+        }
+
+        private void InitGroupModification(GroupData groupData)
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/span["+groupData.RowModify+"]/input")).Click();
+            driver.FindElement(By.XPath("(//input[@name='edit'])[2]")).Click();
         }
 
         public void Remove(int index)
