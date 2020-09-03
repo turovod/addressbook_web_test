@@ -10,12 +10,8 @@ namespace AddressbookWebTest
 
         public void Login(AccountData accountData)
         {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(accountData.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(accountData.Password);
+            ClicClearSendKeys(accountData.Username, By.Name("user"));
+            ClicClearSendKeys(accountData.Password, By.Name("pass"));
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 

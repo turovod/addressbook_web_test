@@ -44,24 +44,6 @@ namespace AddressbookWebTest
             ClicClearSendKeys(contactsData.Notes, By.Name("notes"));
         }
 
-        private void ClickSelectClick(By locatorName, By locatorXPath, string testData)
-        {
-            if (testData != null)
-            {
-                driver.FindElement(locatorName).Click();
-                new SelectElement(driver.FindElement(locatorName)).SelectByText(testData);
-                driver.FindElement(locatorXPath).Click();
-            }
-        }
 
-        private void ClicClearSendKeys(string testData, By locator)
-        {
-            if (testData != null)
-            {
-                driver.FindElement(locator).Click();
-                driver.FindElement(locator).Clear();
-                driver.FindElement(locator).SendKeys(testData);
-            }
-        }
     }
 }
