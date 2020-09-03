@@ -39,7 +39,6 @@ namespace AddressbookWebTest
         private void ExtractContact(int index)
         {
             driver.FindElement(By.XPath("//tr["+ index + "]/td/input")).Click();
-
         }
 
         private void RemoveContact()

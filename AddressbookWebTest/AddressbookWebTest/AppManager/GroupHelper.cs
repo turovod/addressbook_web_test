@@ -27,6 +27,14 @@ namespace AddressbookWebTest
             appManager.Navigator.ReturnGropsPage();
         }
 
+        public void Remove(int index)
+        {
+            appManager.Navigator.GoToGroupsPage();
+            ExtractGroup(index);
+            RemoveGroup();
+            appManager.Navigator.ReturnGropsPage();
+        }
+
         private void SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -34,17 +42,8 @@ namespace AddressbookWebTest
 
         private void InitGroupModification(GroupData groupData)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span["+groupData.RowModify+"]/input")).Click();
-            driver.FindElement(By.XPath("(//input[@name='edit'])[2]")).Click();
+            driver.FindElement(By.Name("edit")).Click();
         }
-
-        public void Remove(int index)
-        {
-            appManager.Navigator.GoToGroupsPage();
-            ExtractGroup(index);
-            RemoveGroup();
-            appManager.Navigator.ReturnGropsPage();
-        } 
 
         public void SubmitGroupCreation()
         {
@@ -54,12 +53,12 @@ namespace AddressbookWebTest
 
         public void InitGroupCreation()
         {
-            driver.FindElement(By.XPath("(//input[@name='new'])")).Click();
+            driver.FindElement(By.Name("new")).Click();
         }
 
         public void ExtractGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.Name("selected[]")).Click();
         }
 
         public void RemoveGroup()
