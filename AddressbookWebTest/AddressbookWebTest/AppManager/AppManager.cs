@@ -26,7 +26,9 @@ namespace AddressbookWebTest
         public GroupHelper Groups { get { return groupHelper; } }
         public ContactsHelper Contacts { get { return contactsHelper; } }
 
-        public AppManager()
+        private static AppManager appManager;
+
+        private AppManager()
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost/addressbook/";
@@ -36,6 +38,16 @@ namespace AddressbookWebTest
             fillFormsHelper = new FillFormsHelper(this);
             groupHelper = new GroupHelper(this);
             contactsHelper = new ContactsHelper(this);
+        }
+
+        public static AppManager GetAppManager()
+        {
+            if (appManager == null)
+            {
+                appManager = new AppManager();
+            }
+
+            return appManager;
         }
 
         public void Stop()
