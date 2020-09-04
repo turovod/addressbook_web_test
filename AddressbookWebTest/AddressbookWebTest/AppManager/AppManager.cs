@@ -15,7 +15,9 @@ namespace AddressbookWebTest
         private FillFormsHelper fillFormsHelper;
         private GroupHelper groupHelper;
         private ContactsHelper contactsHelper;
+        private IsElementPresentHelper isElementPresentHelper;
 
+        private static AppManager appManager;
 
         public IWebDriver Driver { get { return driver; } }
         public string BaseURL { get { return baseURL; } }
@@ -25,8 +27,7 @@ namespace AddressbookWebTest
         public FillFormsHelper FillForms { get { return fillFormsHelper; } }
         public GroupHelper Groups { get { return groupHelper; } }
         public ContactsHelper Contacts { get { return contactsHelper; } }
-
-        private static AppManager appManager;
+        public IsElementPresentHelper IsElementPresent { get { return isElementPresentHelper; } }
 
         private AppManager()
         {
@@ -38,6 +39,7 @@ namespace AddressbookWebTest
             fillFormsHelper = new FillFormsHelper(this);
             groupHelper = new GroupHelper(this);
             contactsHelper = new ContactsHelper(this);
+            isElementPresentHelper = new IsElementPresentHelper(this);
         }
 
         public static AppManager GetAppManager()

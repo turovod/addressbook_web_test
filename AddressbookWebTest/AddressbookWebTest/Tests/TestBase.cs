@@ -4,6 +4,6 @@ namespace AddressbookWebTest
 {
     public class TestBase
     {
-        protected AppManager appManager = AppManager.GetAppManager();
+        protected AppManager appManager = AppManager.GetAppManager(); 
     }
 }
