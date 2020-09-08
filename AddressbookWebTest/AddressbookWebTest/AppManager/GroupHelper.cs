@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace AddressbookWebTest
 {
@@ -65,6 +67,25 @@ namespace AddressbookWebTest
         {
             driver.FindElement(By.Name("delete")).Click();
         }
+
+
+        public List<GroupData> GetGroupsList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+
+            appManager.Navigator.GoToGroupsPage();
+
+            var elements = driver.FindElements(By.CssSelector("span.group"));
+
+            foreach (var element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+
+
+            return groups;
+        }
+
 
     }
 }
