@@ -1,12 +1,32 @@
-﻿namespace AddressbookWebTest
+﻿using System;
+
+namespace AddressbookWebTest
 {
-    public class ContactsData
+    public class ContactsData : IEquatable<ContactsData>
     {
         string firstname;
 
         public ContactsData(string firstname)
         {
             this.firstname = firstname;
+        }
+
+        public bool Equals(ContactsData other)
+        {
+            if (this == other)
+            {
+                return true;
+            }
+            else if (this == null)
+            {
+                return false;
+            }
+            else if (firstname == other.firstname && Lastname == other.Lastname)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public string Firstname 

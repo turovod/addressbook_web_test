@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Collections.Generic;
 
 namespace AddressbookWebTest
 {
@@ -33,10 +34,9 @@ namespace AddressbookWebTest
             appManager.Navigator.GoToHomePage();
         }
 
-        private void ExtractContact(int index)
-        {
-            driver.FindElement(By.XPath("//tr["+ index + "]/td/input")).Click();
-        }
+        private void ExtractContact(int index) => driver.FindElement(By.XPath("//tr[" + index + "]/td/input")).Click();
+    
+           
 
         private void RemoveContact()
         {
@@ -62,6 +62,40 @@ namespace AddressbookWebTest
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
         }
+
+        public List<ContactsData> GetContactsList()
+        {
+            List<ContactsData> contactsList = new List<ContactsData>();
+
+            appManager.Navigator.GoToHomePage();
+
+            var webElementsList = driver.FindElements(By.Name("entry"));
+
+            foreach (var elements in webElementsList)
+            {
+                IList<IWebElement> cells = elements.FindElements(By.TagName("td"));
+
+                contactsList.Add(new ContactsData(cells[1].Text) { Lastname = cells[0].Text });
+            }
+
+            return contactsList;
+        }
+
+        //public List<string> GetContactsList()
+        //{
+        //    List<string> contactsList = new List<string>();
+
+        //    appManager.Navigator.GoToHomePage();
+
+        //    var webElementsList = driver.FindElements(By.TagName("td"));
+
+        //    foreach (var elements in webElementsList)
+        //    {
+        //        contactsList.Add(elements.Text);
+        //    }
+
+        //    return contactsList;
+        //}
 
     }
 }

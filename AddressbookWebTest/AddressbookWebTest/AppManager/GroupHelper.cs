@@ -82,7 +82,6 @@ namespace AddressbookWebTest
                 groups.Add(new GroupData(element.Text));
             }
 
-
             return groups;
         }
 
