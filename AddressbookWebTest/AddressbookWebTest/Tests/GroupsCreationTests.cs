@@ -20,7 +20,12 @@ namespace AddressbookWebTest
 
             List<GroupData> NewGroups = appManager.Groups.GetGroupsList();
 
-            Assert.AreEqual(OldGroups.Count + 1, NewGroups.Count);
+            NewGroups.Add(groupData);
+
+            OldGroups.Sort();
+            NewGroups.Sort();
+
+            Assert.AreEqual(OldGroups, NewGroups);
         }
     }
 }
