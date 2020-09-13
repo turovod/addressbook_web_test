@@ -20,7 +20,7 @@ namespace AddressbookWebTest
 
             List<GroupData> NewGroups = appManager.Groups.GetGroupsList();
 
-            NewGroups.Add(groupData);
+            OldGroups.Add(groupData);
 
             OldGroups.Sort();
             NewGroups.Sort();
