@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace AddressbookWebTest.Tests
+namespace AddressbookWebTest
 {
     [TestFixture]
     class LoginTests : TestBase

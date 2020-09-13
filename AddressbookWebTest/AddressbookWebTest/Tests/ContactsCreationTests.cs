@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace AddressbookWebTest
 {
@@ -34,7 +35,13 @@ namespace AddressbookWebTest
             contactsData.Phone2 = "+7 905 322 223 32";
             contactsData.Notes = "Tra-ta-ta";
 
+            List<ContactsData> oldContactsList = appManager.Contacts.GetContactsList();
+
             appManager.Contacts.Create(contactsData);
+
+            List<ContactsData> newContactsList = appManager.Contacts.GetContactsList();
+
+            Assert.AreEqual(oldContactsList.Count + 1, newContactsList.Count);
         }
     }
 }
