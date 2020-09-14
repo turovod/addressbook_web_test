@@ -40,6 +40,9 @@ namespace AddressbookWebTest
         private void SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+
+            // Clear cache
+            cashGroups = null;
         }
 
         private void InitGroupModification(GroupData groupData)
@@ -50,6 +53,9 @@ namespace AddressbookWebTest
         public void SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+
+            // Clear cache
+            cashGroups = null;
         }
 
 
@@ -66,23 +72,31 @@ namespace AddressbookWebTest
         public void RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+
+            // Clear cache
+            cashGroups = null;
         }
 
+        // Group data caching (Clear cache in methods Submit and Remov!)
+        private List<GroupData> cashGroups = null;
 
         public List<GroupData> GetGroupsList()
         {
-            List<GroupData> groups = new List<GroupData>();
-
-            appManager.Navigator.GoToGroupsPage();
-
-            var elements = driver.FindElements(By.CssSelector("span.group"));
-
-            foreach (var element in elements)
+            if (cashGroups == null)
             {
-                groups.Add(new GroupData(element.Text));
+                cashGroups = new List<GroupData>();
+
+                appManager.Navigator.GoToGroupsPage();
+
+                var elements = driver.FindElements(By.CssSelector("span.group"));
+
+                foreach (var element in elements)
+                {
+                    cashGroups.Add(new GroupData(element.Text));
+                }
             }
 
-            return groups;
+            return new List<GroupData>(cashGroups);
         }
 
 
