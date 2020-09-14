@@ -77,7 +77,16 @@ namespace AddressbookWebTest
             cashGroups = null;
         }
 
-        // Group data caching (Clear cache in methods Submit and Remov!)
+
+        internal int GetGroupsCount()
+        {
+            int counts = driver.FindElements(By.CssSelector("span.group")).Count;
+
+            return counts;
+        }
+
+
+        // Group data caching (Warning! Clear cache in methods Submit and Remov!)
         private List<GroupData> cashGroups = null;
 
         public List<GroupData> GetGroupsList()

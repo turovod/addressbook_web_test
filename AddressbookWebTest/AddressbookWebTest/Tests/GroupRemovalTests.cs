@@ -15,6 +15,12 @@ namespace AddressbookWebTest
 
             appManager.Groups.Remove(1);
 
+            // ---------------------------------------------- Quick check (when tests often break)
+
+            Assert.AreEqual(oldGroupList.Count -1, appManager.Groups.GetGroupsCount());
+
+            // ---------------------------------------------- Slow check
+
             List<GroupData> newGroupList = appManager.Groups.GetGroupsList();
 
             oldGroupList.RemoveAt(0);

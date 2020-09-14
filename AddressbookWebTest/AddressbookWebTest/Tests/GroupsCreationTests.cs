@@ -14,18 +14,27 @@ namespace AddressbookWebTest
             groupData.Header = "ssss";
             groupData.Footer = "ssss";
 
-            List<GroupData> OldGroups = appManager.Groups.GetGroupsList();
+            List<GroupData> oldGroupList = appManager.Groups.GetGroupsList();
 
             appManager.Groups.Create(groupData);
 
-            List<GroupData> NewGroups = appManager.Groups.GetGroupsList();
 
-            OldGroups.Add(groupData);
+            // ---------------------------------------------- Quick check (when tests often break)
 
-            OldGroups.Sort();
-            NewGroups.Sort();
+            Assert.AreEqual(oldGroupList.Count +1, appManager.Groups.GetGroupsCount());
 
-            Assert.AreEqual(OldGroups, NewGroups);
+            // ---------------------------------------------- Slow check
+
+            List<GroupData> NewGroupsList = appManager.Groups.GetGroupsList();
+
+            oldGroupList.Add(groupData);
+
+            oldGroupList.Sort();
+            NewGroupsList.Sort();
+
+            Assert.AreEqual(oldGroupList, NewGroupsList);
+
+            // -----------------------------------------------
         }
     }
 }
