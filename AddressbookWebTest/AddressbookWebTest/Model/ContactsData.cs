@@ -2,7 +2,7 @@
 
 namespace AddressbookWebTest
 {
-    public class ContactsData : IEquatable<ContactsData>
+    public class ContactsData : IEquatable<ContactsData>, IComparable<ContactsData>
     {
         string firstname;
 
@@ -27,6 +27,19 @@ namespace AddressbookWebTest
             }
 
             return false;
+        }
+
+        public int CompareTo(ContactsData other)
+        {
+            if (Object.ReferenceEquals(this, null))
+            {
+                return 1;
+            }
+            if (this.Firstname != other.Firstname || this.Lastname != other.Lastname)
+            {
+                return -1;
+            }
+            return 0;
         }
 
         public string Firstname 

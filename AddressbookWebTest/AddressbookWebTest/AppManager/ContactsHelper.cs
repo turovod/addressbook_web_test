@@ -80,22 +80,5 @@ namespace AddressbookWebTest
 
             return contactsList;
         }
-
-        //public List<string> GetContactsList()
-        //{
-        //    List<string> contactsList = new List<string>();
-
-        //    appManager.Navigator.GoToHomePage();
-
-        //    var webElementsList = driver.FindElements(By.TagName("td"));
-
-        //    foreach (var elements in webElementsList)
-        //    {
-        //        contactsList.Add(elements.Text);
-        //    }
-
-        //    return contactsList;
-        //}
-
     }
 }
