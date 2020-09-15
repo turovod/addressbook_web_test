@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 
 namespace AddressbookWebTest
@@ -48,9 +49,9 @@ namespace AddressbookWebTest
 
         private void InitContactModification(ContactsData contactsData)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contactsData.RowModfy + "]/td[8]/a/img")).Click();
+            //driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contactsData.RowModfy + "]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
         }
-
 
         public void SubmitContactCreation()
         {
@@ -62,6 +63,15 @@ namespace AddressbookWebTest
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
         }
+
+
+        internal int GetContactsCount()
+        {
+            var webElementsList = driver.FindElements(By.Name("entry"));
+
+            return webElementsList.Count;
+        }
+
 
         public List<ContactsData> GetContactsList()
         {

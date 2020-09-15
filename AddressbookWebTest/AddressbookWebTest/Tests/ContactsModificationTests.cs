@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace AddressbookWebTest
 {
@@ -35,7 +36,19 @@ namespace AddressbookWebTest
             contactsData.Notes = "Tra-ta-ta";
             contactsData.RowModfy = 6;
 
+            List<ContactsData> oldContactsList = appManager.Contacts.GetContactsList();
+
             appManager.Contacts.Modify(contactsData);
+
+            // ---------------------------------------------- Quick check (when tests often break)
+
+            Assert.AreEqual(oldContactsList.Count, appManager.Contacts.GetContactsCount());
+
+            // ---------------------------------------------- Slow check
+
+            List<ContactsData> newContactsList = appManager.Contacts.GetContactsList();
+
+            Assert.AreNotEqual(oldContactsList, newContactsList);
         }
     }
 }

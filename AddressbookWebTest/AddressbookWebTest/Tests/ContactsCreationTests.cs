@@ -39,6 +39,12 @@ namespace AddressbookWebTest
 
             appManager.Contacts.Create(contactsData);
 
+            // ---------------------------------------------- Quick check (when tests often break)
+
+            Assert.AreEqual(oldContactsList.Count + 1, appManager.Contacts.GetContactsCount());
+
+            // ---------------------------------------------- Slow check
+
             List<ContactsData> newContactsList = appManager.Contacts.GetContactsList();
 
             newContactsList.RemoveAt(0);
