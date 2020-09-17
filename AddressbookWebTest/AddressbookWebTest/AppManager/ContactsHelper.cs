@@ -37,8 +37,6 @@ namespace AddressbookWebTest
 
         private void ExtractContact(int index) => driver.FindElement(By.XPath("//tr[" + index + "]/td/input")).Click();
     
-           
-
         private void RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -49,7 +47,6 @@ namespace AddressbookWebTest
 
         private void InitContactModification(ContactsData contactsData)
         {
-            //driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contactsData.RowModfy + "]/td[8]/a/img")).Click();
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
         }
 
@@ -81,11 +78,25 @@ namespace AddressbookWebTest
 
             var webElementsList = driver.FindElements(By.Name("entry"));
 
-            foreach (var elements in webElementsList)
+            foreach (var element in webElementsList)
             {
-                IList<IWebElement> cells = elements.FindElements(By.TagName("td"));
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
 
-                contactsList.Add(new ContactsData(cells[1].Text) { Lastname = cells[0].Text });
+                contactsList.Add(new ContactsData(cells[1].Text)
+                {
+                    Lastname = cells[0].Text,
+
+                    //Searching for a specific tag and its attribute in the element
+                    Id = element.FindElement(By.TagName("input")).GetAttribute("id")
+
+                    //Searching for a specific tag behind the tag in an element
+                    //Id = driver.FindElement(By.TagName("input")).FindElements(By.TagName("id")).Text
+                });
+
+                foreach (var item in contactsList)
+                {
+                    Console.WriteLine(item.Id);
+                }
             }
 
             return contactsList;

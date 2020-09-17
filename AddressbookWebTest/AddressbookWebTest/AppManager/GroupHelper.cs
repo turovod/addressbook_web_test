@@ -101,8 +101,17 @@ namespace AddressbookWebTest
 
                 foreach (var element in elements)
                 {
-                    cashGroups.Add(new GroupData(element.Text));
+                    cashGroups.Add(new GroupData(element.Text)
+                    {
+                        //Searching for a specific tag and its attribute in the element
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    }) ;
                 }
+            }
+
+            foreach (var item in cashGroups)
+            {
+                Console.WriteLine(item.Id);
             }
 
             return new List<GroupData>(cashGroups);

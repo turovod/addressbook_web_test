@@ -4,11 +4,16 @@ namespace AddressbookWebTest
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        string name;
-        string header;
-        string footer;
 
-        int rowModify;
+        public string Name { get; set; }
+
+        public string Header { get; set; }
+
+        public string Footer { get; set; }
+        
+        public string Id { get; set; }
+
+        public int RowModify { get; set; }
 
         // Реализация интерфейса IEquatable для организации сравнения оъектов. По умолчанию объекты равны, если ссылки на 
         // один и тот же объект
@@ -47,36 +52,7 @@ namespace AddressbookWebTest
 
         public GroupData(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
-
-        public string Name
-        {
-            get { return name; }
-
-            set { name = value; }
-        }
-
-        public string Header
-        {
-            get { return header; }
-
-            set { header = value; }
-        }
-
-        public string Footer
-        {
-            get { return footer; }
-
-            set { footer = value; }
-        }
-
-        public int RowModify
-        {
-            get { return rowModify; }
-
-            set { rowModify = value; }
-        }
-
     }
 }

@@ -73,5 +73,6 @@ namespace AddressbookWebTest
         public string Notes { get; set; }
 
         public int RowModfy { get; set; }
+        public string Id { get; set; }
     }
 }

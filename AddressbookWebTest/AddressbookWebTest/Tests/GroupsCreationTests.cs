@@ -25,14 +25,14 @@ namespace AddressbookWebTest
 
             // ---------------------------------------------- Slow check
 
-            List<GroupData> NewGroupsList = appManager.Groups.GetGroupsList();
+            List<GroupData> newGroupsList = appManager.Groups.GetGroupsList();
 
             oldGroupList.Add(groupData);
 
             oldGroupList.Sort();
-            NewGroupsList.Sort();
+            newGroupsList.Sort();
 
-            Assert.AreEqual(oldGroupList, NewGroupsList);
+            Assert.AreEqual(oldGroupList, newGroupsList);
 
             // -----------------------------------------------
         }
