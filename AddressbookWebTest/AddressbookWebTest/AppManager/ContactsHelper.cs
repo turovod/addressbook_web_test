@@ -92,11 +92,6 @@ namespace AddressbookWebTest
                     //Searching for a specific tag behind the tag in an element
                     //Id = driver.FindElement(By.TagName("input")).FindElements(By.TagName("id")).Text
                 });
-
-                foreach (var item in contactsList)
-                {
-                    Console.WriteLine(item.Id);
-                }
             }
 
             return contactsList;

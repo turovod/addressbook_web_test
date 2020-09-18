@@ -9,7 +9,9 @@ namespace AddressbookWebTest
         [Test]
         public void LoginWithValidCredentionals()
         {
-            Assert.IsTrue(appManager.IsElementPresent.IsElementPresent(By.Name("logout")));
+            // Assert.IsTrue(appManager.IsElementPresent.IsElementPresent(By.Name("logout")));
+
+            Assert.IsTrue(appManager.Auth.IsLoggedIn());
         }
     }
 }

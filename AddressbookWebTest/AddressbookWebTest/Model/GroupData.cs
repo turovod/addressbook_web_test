@@ -15,7 +15,7 @@ namespace AddressbookWebTest
 
         public int RowModify { get; set; }
 
-        // Реализация интерфейса IEquatable для организации сравнения оъектов. По умолчанию объекты равны, если ссылки на 
+        // Реализация интерфейса IEquatable для организации сравнения объектов. По умолчанию объекты равны, если ссылки на 
         // один и тот же объект
 
         public bool Equals(GroupData other)
@@ -40,6 +40,8 @@ namespace AddressbookWebTest
             return false;
         }
 
+        // Реализация интерфейса IComparable для организации упорядочивания объектов.
+        // Возвращает 1 если текущий объект больше other, -1 если текущий объект меньше other и 0 если равны.
         public int CompareTo(GroupData other)
         {
             if (Object.ReferenceEquals(other, null))
