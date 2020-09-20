@@ -107,7 +107,8 @@ namespace AddressbookWebTest
             return new ContactsData(cells[2].Text)
             {
                 Lastname = cells[1].Text,
-                Address = cells[3].Text
+                Address = cells[3].Text,
+                AllPhones = cells[5].Text
             };
         }
 

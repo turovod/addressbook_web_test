@@ -21,6 +21,7 @@ namespace AddressbookWebTest
             Assert.AreEqual(contactDataFromEditForm, contactDataFromTable);
             // Add address comparison check
             Assert.AreEqual(contactDataFromEditForm.Address, contactDataFromTable.Address);
+            Assert.AreEqual(contactDataFromEditForm.AllPhones, contactDataFromTable.AllPhones);
         }
     }
 }

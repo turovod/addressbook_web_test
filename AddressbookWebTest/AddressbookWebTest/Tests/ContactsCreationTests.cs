@@ -17,9 +17,9 @@ namespace AddressbookWebTest
             contactsData.Title = "Tra-ta-ta";
             contactsData.Company = "NiPomNu";
             contactsData.Address = "Moscow, sleva";
-            contactsData.Home = "15";
+            contactsData.Home = "+7 905 322 223 32";
             contactsData.Mobile = "+7 905 322 223 32";
-            contactsData.Work = "Guard";
+            contactsData.Work = "+7 905 322 223 32";
             contactsData.Fax = "+7 905 322 223 32";
             contactsData.Email = "superbulet@mail.ru";
             contactsData.Email2 = "superbulet@mail.ru";
