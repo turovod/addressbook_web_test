@@ -13,7 +13,7 @@ namespace AddressbookWebTest
         internal void Modify(ContactsData contactsData)
         {
             appManager.Navigator.GoToHomePage();
-            InitContactModification(contactsData);
+            InitContactModification();
             appManager.FillForms.FillContactForm(contactsData);
             UpdateContactModification();
             appManager.Navigator.GoToHomePage();
@@ -45,7 +45,7 @@ namespace AddressbookWebTest
         }
 
 
-        private void InitContactModification(ContactsData contactsData)
+        private void InitContactModification()
         {
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
         }
@@ -95,6 +95,44 @@ namespace AddressbookWebTest
             }
 
             return contactsList;
+        }
+
+
+        public ContactsData GetContactInformationFromTable(int index)
+        {
+            appManager.Navigator.GoToHomePage();
+
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+
+            return new ContactsData(cells[2].Text)
+            {
+                Lastname = cells[1].Text,
+                Address = cells[3].Text
+            };
+        }
+
+        public ContactsData GetContactInformationFromEditForm(int index)
+        {
+            appManager.Navigator.GoToHomePage();
+            InitContactModification();
+
+
+            return new ContactsData(driver.FindElement(By.Name("firstname")).GetAttribute("value"))
+            {
+                Middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value"),
+                Lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value"),
+                Nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value"),
+                Title = driver.FindElement(By.Name("title")).GetAttribute("value"),
+                Company = driver.FindElement(By.Name("company")).GetAttribute("value"),
+                Address = driver.FindElement(By.Name("address")).GetAttribute("value"),
+                Home = driver.FindElement(By.Name("home")).GetAttribute("value"),
+                Mobile = driver.FindElement(By.Name("mobile")).GetAttribute("value"),
+                Work = driver.FindElement(By.Name("work")).GetAttribute("value"),
+                Fax = driver.FindElement(By.Name("fax")).GetAttribute("value"),
+                Email = driver.FindElement(By.Name("email")).GetAttribute("email"),
+                Email2 = driver.FindElement(By.Name("email2")).GetAttribute("value"),
+                Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value")
+            };  
         }
     }
 }

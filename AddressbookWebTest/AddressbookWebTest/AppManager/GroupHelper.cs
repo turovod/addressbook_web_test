@@ -107,6 +107,14 @@ namespace AddressbookWebTest
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     }) ;
                 }
+                // ---------------------------------------------------- This code is not used
+
+                // All group names in from div with id "content" that has a form
+                string allGroupNames = driver.FindElement(By.CssSelector("div#content foprm")).Text;
+                // We cut the line into words, by line break
+                string[] groupName = allGroupNames.Split('\n');
+
+                // ----------------------------------------------------
             }
 
             foreach (var item in cashGroups)
