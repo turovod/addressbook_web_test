@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace AddressbookWebTest
 {
@@ -134,6 +135,19 @@ namespace AddressbookWebTest
                 Email2 = driver.FindElement(By.Name("email2")).GetAttribute("value"),
                 Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value")
             };  
+        }
+
+        public int GetNumberOfSerchResults()
+        {
+            appManager.Navigator.GoToHomePage();
+            // A simple solution
+            string text = driver.FindElement(By.Id("search_count")).Text;
+
+            return Convert.ToInt32(text);
+
+            //string text = driver.FindElement(By.TagName("label")).Text;
+
+            //return Convert.ToInt32(new Regex(@"\d+").Match(text).Value);
         }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Model\GroupData.cs" />
     <Compile Include="Tests\ContactsModificationTests.cs" />
     <Compile Include="Tests\ContactsRemovalTests.cs" />
+    <Compile Include="Tests\FindTheNumberOfContactsTest.cs" />
     <Compile Include="Tests\GroupModificationTests.cs" />
     <Compile Include="Tests\GroupRemovalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
