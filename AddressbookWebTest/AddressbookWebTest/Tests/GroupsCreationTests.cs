@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,21 +9,22 @@ namespace AddressbookWebTest
     [TestFixture]
     public class GroupsCreationTests : TestBase
     {
-        //public static List<GroupData> RandomGroupDataProvider()
-        //{
-        //    List<GroupData> groups = new List<GroupData>();
+        public static List<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
 
-        //    for (int i = 0; i < 5; i++)
-        //    {
-        //        groups.Add(new GroupData(GenerateRandomString(30))
-        //        {
-        //            Header = GenerateRandomString(100),
-        //            Footer = GenerateRandomString(100)
-        //        });
-        //    }
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100)
+                });
+            }
 
-        //    return groups;
-        //}
+            return groups;
+        }
+
 
         public static List<GroupData> GroupDataFromCsvFile()
         {
@@ -49,8 +51,8 @@ namespace AddressbookWebTest
             return groups;
         }
 
-        // Провайдер тестоывх данных
-        [Test, TestCaseSource("GroupDataFromCsvFile")]
+               // Провайдер тестоывх данных
+        [Test, TestCaseSource("RandomGroupDataProvider")]
         public void GroupCreationTestWitsTestDataFromFile(GroupData groupData)
         {
             List<GroupData> oldGroupList = appManager.Groups.GetGroupsList();
