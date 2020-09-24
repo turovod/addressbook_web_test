@@ -15,6 +15,16 @@ namespace AddressbookWebTest
 
         public int RowModify { get; set; }
 
+        // The default constructor is needed for the Xnl Serializer (convertor)
+        public GroupData()
+        {
+        }
+
+        public GroupData(string name)
+        {
+            this.Name = name;
+        }
+
         // Реализация интерфейса IEquatable для организации сравнения объектов. По умолчанию объекты равны, если ссылки на 
         // один и тот же объект
 
@@ -50,11 +60,6 @@ namespace AddressbookWebTest
             }
 
             return Name.CompareTo(other.Name);
-        }
-
-        public GroupData(string name)
-        {
-            this.Name = name;
         }
     }
 }
