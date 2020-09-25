@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace ConvertorCsvJsonXml
 {
@@ -60,17 +61,17 @@ namespace ConvertorCsvJsonXml
 
             if (format == "csv")
             {
-                writeGroupsToCsvFile(groups, writerGroup);
+                WriteGroupsToCsvFile(groups, writerGroup);
 
             }
             else if (format == "xml")
             {
-                writwGroupsToXmlFile(groups, writerGroup);
+                WritwGroupsToXmlFile(groups, writerGroup);
                 // writwContactsToXmlFile(contacts, writerContact);
             }
             else if (format == "json")
             {
-                writwGroupsToJsonFile(groups, writerGroup);
+                WritwGroupsToJsonFile(groups, writerGroup);
                 // writwContactsToJsonFile(contacts, writerContact);
             }
 
@@ -81,7 +82,7 @@ namespace ConvertorCsvJsonXml
             writerGroup.Close();
         }
 
-        static void writeGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)
+        static void WriteGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)
         {
             foreach (GroupData group in groups)
             {
@@ -89,7 +90,7 @@ namespace ConvertorCsvJsonXml
             }
         }
 
-        static void writwGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
+        static void WritwGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
         }
@@ -99,15 +100,18 @@ namespace ConvertorCsvJsonXml
             new XmlSerializer(typeof(List<ContactsData>)).Serialize(writer, contacts);
         }
 
-        static void writwGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
-        {
-
+        // Instal Newtonsoft.Json (NuGet)
+        static void WritwGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
+        {                                                    // форматирует в файле строки для красоты
+            writer.Write(JsonConvert.SerializeObject(groups, Formatting.Indented));
         }
 
+        // Instal Newtonsoft.Json (NuGet)
         //static void writwContactsToJsonFile(List<ContactsData> contacts, StreamWriter writer)
         //{
-        //    writer.Write(JsonNet.Serialize(contacts));
+        //    writer.Write(JsonConvert.Serialize(contacts));
         //}
 
     }
 }
+ 
