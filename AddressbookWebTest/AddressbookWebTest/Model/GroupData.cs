@@ -30,36 +30,33 @@ namespace AddressbookWebTest
 
         public bool Equals(GroupData other)
         {
-            // Проверки по правилам хорошего кода
-            if (this == other) // Если объекты равны, то и элементы равны
-            {
-                return true;
-            }
+            return Name.Equals(other.Name);
 
-            // Проверки по правилам хорошего кода
-            if (this == null) // Если сравниваемый объект не существует, то точно не равны
-            {
-                return false;
-            }
+            //// Проверки по правилам хорошего кода
+            //if (this == other) // Если объекты равны, то и элементы равны
+            //{
+            //    return true;
+            //}
 
-            if (this.Name == other.Name) // Сравниваем только по имени (правило сравнения)
-            {
-                return true;
-            }
+            //// Проверки по правилам хорошего кода
+            //if (this == null) // Если сравниваемый объект не существует, то точно не равны
+            //{
+            //    return false;
+            //}
 
-            return false;
+            //if (this.Name == other.Name) // Сравниваем только по имени (правило сравнения)
+            //{
+            //    return true;
+            //}
+
+            //return false;
         }
 
         // Реализация интерфейса IComparable для организации упорядочивания объектов.
         // Возвращает 1 если текущий объект больше other, -1 если текущий объект меньше other и 0 если равны.
         public int CompareTo(GroupData other)
         {
-            if (Object.ReferenceEquals(other, null))
-            {
-                return 1;
-            }
-
-            return Name.CompareTo(other.Name);
+             return Name.CompareTo(other.Name);
         }
     }
 }
