@@ -11,6 +11,9 @@ namespace AddressbookTestsWhite
 
         private GroupHalper groupHalper;
 
+        public Window MainWindow { get; private set; }
+
+
         // Run addressbook
         public ApplicationManager()
         {
@@ -33,7 +36,5 @@ namespace AddressbookTestsWhite
         {
             get { return groupHalper; }
         }
-
-        public Window MainWindow { get; private set; }
     }
 }

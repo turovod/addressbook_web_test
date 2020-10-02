@@ -1,5 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestStack.White;
+using TestStack.White.UIItems;
+using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.TreeItems;
+using TestStack.White.UIItems.WindowItems;
+using System.Windows.Automation;
+using TestStack.White.InputDevices;
+using TestStack.White.WindowsAPI;
 
 namespace AddressbookTestsWhite
 {
@@ -14,41 +22,58 @@ namespace AddressbookTestsWhite
         {
             List<GroupData> groupList = new List<GroupData>();
 
-            OpenGroupsDialogue();
-            //  см. https://autoit-script.ru/docs   Путь             Id                                           что сделать    От какого элемента (от родительского)
-            string count = aux.ControlTreeView(GROUPWINTITLE, "", "WindowsForms10.SysTreeView32.app.0.2c908d51", "GetItemCount", "#0", "");
+            Window dialog = OpenGroupsDialogue();
 
-            for (int i = 0; i < Convert.ToInt32(count); i++)
+            // Get the tree of window elements // Take automation id window tree from VisualUIAVerify
+            Tree tree = dialog.Get<Tree>("uxAddressTreeView");
+
+            // The "nodes" property returns all root elements (we have only one)
+            TreeNode root = tree.Nodes[0];
+                                // list of children of the root element
+            foreach (TreeNode node in root.Nodes)
             {
-                //  Аутоит всегда возвращает стринг                      id                                          дать текст от родительского элемента перебирая дочерние
-                string item = aux.ControlTreeView(GROUPWINTITLE, "", "WindowsForms10.SysTreeView32.app.0.2c908d51", "GetText", "#0|#" + i, "");
-
-                groupList.Add(new GroupData() { Name = item });
+                groupList.Add(new GroupData() { Name = node.Text });
             }
 
-            CloseGroupsDialogue();
+            CloseGroupsDialogue(dialog);
 
             return groupList;
         }
 
         public void Add(GroupData newGroup)
         {
-            OpenGroupsDialogue();
-            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d53");
-            aux.Send(newGroup.Name); // We write down the name of the group
-            aux.Send("{ENTER}"); // Emulate pressing "Enter"
-            CloseGroupsDialogue();
+            Window dialog = OpenGroupsDialogue();
+            dialog.Get<Button>("uxNewAddressButton").Click();
+
+            // To plug UIAutomationClient and UIAutomatipnTypes in References
+            // To plug using TestStack.White.UIItems.Finders;
+
+            // The node has neither a name nor an auto hell, but it is a text box, and we will 
+            // search for it by type, nd throw at him using
+            // using System.Windows.Automation;
+                                                                                // Found an editable field
+            TextBox textBox =  (TextBox)dialog.Get(SearchCriteria.ByControlType(ControlType.Edit));
+            textBox.Enter(newGroup.Name); // Enter group name
+
+            // Info for White https://archive.codeplex.com/ section "discussions"
+            Keyboard.Instance.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN); // press "enter"
+            
+            CloseGroupsDialogue(dialog);
         }
 
-        private void CloseGroupsDialogue()
+        private void CloseGroupsDialogue(Window dialog)
         {
-            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d54");
+            // In the transmitted window, click the button
+            dialog.Get<Button>("uxCloseAddressButton").Click();
         }
 
-        private void OpenGroupsDialogue()
+        // We will return the opened window
+        private Window OpenGroupsDialogue()
         {
-            aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d512");
-            aux.WinWait(GROUPWINTITLE);
+            // Clic button "Edit groups"
+            manager.MainWindow.Get<Button>("groupButton").Click();
+            // Return window "Group editor"
+            return manager.MainWindow.ModalWindow(GROUPWINTITLE);
         }
     }
 }
